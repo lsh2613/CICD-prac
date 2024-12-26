@@ -45,13 +45,13 @@ jobs:
     #     touch ./application.yml
     #     echo "${{ secrets.YML }}" > ./application.yml
     #   shell: bash
-    
-    # - name: 4. Copy application.yml
-    #   env:
-    #     CREATE_SECRET: ${{secrets.APPLICATION_YML}}
-    #     CREATE_SECRET_DIR: src/main/resources
-    #     CREATE_SECRET_DIR_FILE_NAME: application.yml
-    #   run: echo $CREATE_SECRET | base64 --decode > $CREATE_SECRET_DIR/$CREATE_SECRET_DIR_FILE_NAME
+
+    - name: 4. Copy application.yml
+      env:
+        CREATE_SECRET: ${{secrets.APPLICATION_YML}}
+        CREATE_SECRET_DIR: src/main/resources
+        CREATE_SECRET_DIR_FILE_NAME: application.yml
+      run: echo $CREATE_SECRET | base64 --decode > $CREATE_SECRET_DIR/$CREATE_SECRET_DIR_FILE_NAME
 
     - name: 5. Grant execute permission for gradlew
       run: chmod +x gradlew
