@@ -53,7 +53,7 @@ jobs:
         CREATE_SECRET_DIR_FILE_NAME: application.yml
       run: |
         mkdir -p $CREATE_SECRET_DIR
-        echo "$CREATE_SECRET" | base64 --decode > $CREATE_SECRET_DIR/$CREATE_SECRET_DIR_FILE_NAME
+        echo -n "$CREATE_SECRET" | base64 --decode > $CREATE_SECRET_DIR/$CREATE_SECRET_DIR_FILE_NAME
 
     # - name: 6. Copy Application-dev.yml
     #   run: |
