@@ -52,9 +52,9 @@ jobs:
         CREATE_SECRET_DIR: src/main/resources
         CREATE_SECRET_DIR_FILE_NAME: application.yml
       run: |
-        mkdir -p src/main/resources
-        touch src/main/resources/application.yml
-        echo ${{secrets.APPLICATION_YML}} | base64 --decode > $CREATE_SECRET_DIR/$CREATE_SECRET_DIR_FILE_NAME
+        mkdir -p ./src/main/resources
+        touch ./src/main/resources/application.yml
+        echo ${{secrets.APPLICATION_YML}} | base64 --decode > ./$CREATE_SECRET_DIR/$CREATE_SECRET_DIR_FILE_NAME
 
     # - name: 6. Copy Application-dev.yml
     #   run: |
