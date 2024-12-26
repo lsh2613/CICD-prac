@@ -52,13 +52,18 @@ jobs:
         CREATE_SECRET_DIR: src/main/resources
         CREATE_SECRET_DIR_FILE_NAME: application.yml
       run: |
-        echo $CREATE_SECRET > test.yml
-        cat test.yml
-        echo $CREATE_SECRET | base64 --decode > test.yml
-        cat test.yml
-        
         mkdir -p src/main/resources
-        echo $CREATE_SECRET | base64 --decode > $CREATE_SECRET_DIR/$CREATE_SECRET_DIR_FILE_NAME
+        touch src/main/resources/application-dev.yml
+        echo ${{secrets.APPLICATION_YML}} | base64 --decode > $CREATE_SECRET_DIR/$CREATE_SECRET_DIR_FILE_NAME
+
+    # - name: 6. Copy Application-dev.yml
+    #   run: |
+    #     mkdir -p ./src/main/resources
+    #     touch ./src/main/resources/application.yml
+    #     echo "${{ secrets.APPLICATION_YML }}" | base64 --decode > ./src/main/resources/application.yml
+    #     touch ./src/main/resources/application-dev.yml
+    #     echo "${{ secrets.APPLICATION_DEV_YML }}" | base64 --decode > ./src/main/resources/application-dev.yml
+    #   shell: bash
 
     - name: 5. Grant execute permission for gradlew
       run: chmod +x gradlew
