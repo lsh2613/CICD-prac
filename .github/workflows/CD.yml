@@ -46,15 +46,14 @@ jobs:
     #     echo "${{ secrets.YML }}" > ./application.yml
     #   shell: bash
 
-    - name: 4. Copy application.yml
+    - name: Copy application.yml
       env:
-        CREATE_SECRET: ${{secrets.APPLICATION_YML}}
+        CREATE_SECRET: ${{ secrets.APPLICATION_YML }}
         CREATE_SECRET_DIR: src/main/resources
         CREATE_SECRET_DIR_FILE_NAME: application.yml
       run: |
-        mkdir -p ./src/main/resources
-        touch ./src/main/resources/application.yml
-        echo ${{secrets.APPLICATION_YML}} | base64 --decode > ./$CREATE_SECRET_DIR/$CREATE_SECRET_DIR_FILE_NAME
+        mkdir -p $CREATE_SECRET_DIR
+        echo "$CREATE_SECRET" | base64 --decode > $CREATE_SECRET_DIR/$CREATE_SECRET_DIR_FILE_NAME
 
     # - name: 6. Copy Application-dev.yml
     #   run: |
