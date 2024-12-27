@@ -23,5 +23,8 @@ public class Controller {
         return LocalDateTime.now().toString();
     }
 
-
+    @GetMapping("/ci-cd")
+    public String cicd() {
+        return "CICD is success!";
+    }
 }
