@@ -3,6 +3,8 @@ package com.cicdprac;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
 @RestController
 public class Controller {
 
@@ -15,4 +17,10 @@ public class Controller {
     public String test() {
         return "This is a test page";
     }
+
+    @GetMapping("/time")
+    public String time() {
+        return LocalDateTime.now().toString();
+    }
+
 }
