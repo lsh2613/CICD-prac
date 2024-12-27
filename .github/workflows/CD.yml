@@ -9,9 +9,8 @@ env:
   ECR_REPOSITORY: pitchain                   # set this to your Amazon ECR repository name
   ECS_SERVICE: pitchain-service                 # set this to your Amazon ECS service name
   ECS_CLUSTER: pitchain-cluster                 # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: pitchain-task-definition.json  # 위에서 다운받은 Task Definition의 파일 이름
+  ECS_TASK_DEFINITION: pitchain-task-definition.json  # Task Definition의 파일 이름
   CONTAINER_NAME: pitchain-cont           # set this to the name of the container in the
-  # containerDefinitions section of your task definition
   
 permissions:
   contents: read
@@ -39,14 +38,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
 
-    # - name: 4. make application.yml
-    #   run: |
-    #     cd ./src/main/resources
-    #     touch ./application.yml
-    #     echo "${{ secrets.YML }}" > ./application.yml
-    #   shell: bash
-
-    - name: Copy application.yml
+    - name: 4. Copy application.yml
       env:
         CREATE_SECRET: ${{ secrets.APPLICATION_YML }}
         CREATE_SECRET_DIR: src/main/resources
@@ -55,33 +47,24 @@ jobs:
         mkdir -p $CREATE_SECRET_DIR
         echo -n "$CREATE_SECRET" | base64 --decode > $CREATE_SECRET_DIR/$CREATE_SECRET_DIR_FILE_NAME
 
-    # - name: 6. Copy Application-dev.yml
-    #   run: |
-    #     mkdir -p ./src/main/resources
-    #     touch ./src/main/resources/application.yml
-    #     echo "${{ secrets.APPLICATION_YML }}" | base64 --decode > ./src/main/resources/application.yml
-    #     touch ./src/main/resources/application-dev.yml
-    #     echo "${{ secrets.APPLICATION_DEV_YML }}" | base64 --decode > ./src/main/resources/application-dev.yml
-    #   shell: bash
-
     - name: 5. Grant execute permission for gradlew
       run: chmod +x gradlew
 
     - name: 6. Build with Gradle, without test
       run: ./gradlew clean build -x test
       
-    - name: Configure AWS credentials
+    - name: 7. Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
-    - name: Login to Amazon ECR
+    - name: 8. Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Build, tag, and push image to Amazon ECR
+    - name: 9. Build, tag, and push image to Amazon ECR
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -91,7 +74,7 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
-    - name: Fill in the new image ID in the Amazon ECS task definition
+    - name: 10. Fill in the new image ID in the Amazon ECS task definition
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
@@ -99,7 +82,7 @@ jobs:
         container-name: ${{ env.CONTAINER_NAME }}
         image: ${{ steps.build-image.outputs.image }}
 
-    - name: Deploy Amazon ECS task definition
+    - name: 11. Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
