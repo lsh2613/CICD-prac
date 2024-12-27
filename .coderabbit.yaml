@@ -12,6 +12,8 @@ reviews: # 리뷰 관련 설정
   auto_review: # 자동 리뷰 설정
     enabled: true # 자동 리뷰 활성화 여부
     drafts: false # 자동 리뷰 시 초안 모드 여부
+    base_branches:
+      - *
 
 chat: # AI와의 상호작용 관련 설정
   auto_reply: true # AI 자동 응답 여부
