@@ -12,7 +12,7 @@ reviews: # 리뷰 관련 설정
   auto_review: # 자동 리뷰 설정
     enabled: true # 자동 리뷰 활성화 여부
     drafts: false # 자동 리뷰 시 초안 모드 여부
-    base_branches:
+    base_branches: # 리뷰 적용 할 브랜치
       - dev
       - feat/.*
 
