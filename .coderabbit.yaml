@@ -14,6 +14,7 @@ reviews: # 리뷰 관련 설정
     drafts: false # 자동 리뷰 시 초안 모드 여부
     base_branches:
       - dev
+      - feat/.*
 
 chat: # AI와의 상호작용 관련 설정
   auto_reply: true # AI 자동 응답 여부
