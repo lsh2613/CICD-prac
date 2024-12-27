@@ -27,4 +27,9 @@ public class Controller {
     public String cicd() {
         return "CICD is success!";
     }
+
+    @GetMapping("/coderabbitai")
+    public String coderabbitai() {
+        return "coderabbitai is success!";
+    }
 }
