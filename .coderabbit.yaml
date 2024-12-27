@@ -6,7 +6,7 @@ reviews: # 리뷰 관련 설정
   profile: "chill" # 리뷰 스타일 설정 (chill: 가벼운 리뷰 스타일)
   request_changes_workflow: false # 코드 변경 요청 워크플로우 활성화 여부
   poem: false
-  high_level_summary: true # 코드 리뷰 요약 제공 여부
+  high_level_summary: false # 코드 리뷰 요약 제공 여부
   review_status: true # 리뷰 상태 표시 여부
   collapse_walkthrough: true # 코드 설명 접기 여부
   auto_review: # 자동 리뷰 설정
