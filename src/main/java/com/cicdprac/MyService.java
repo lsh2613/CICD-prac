@@ -8,4 +8,8 @@ public class MyService {
     public String api() {
         return "API is success!";
     }
+
+    public String api2() {
+        return "API is success!";
+    }
 }

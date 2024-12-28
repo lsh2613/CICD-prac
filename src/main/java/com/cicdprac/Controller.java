@@ -45,4 +45,9 @@ public class Controller {
     public String api() {
         return myService.api();
     }
+
+    @GetMapping("/api2")
+    public String api2() {
+        return myService.api2();
+    }
 }
