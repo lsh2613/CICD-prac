@@ -51,5 +51,11 @@ jobs:
       - name: Check Redis Port
         run: echo PING | nc -w 1 localhost 6379 || echo "Redis is not running"
 
+      - name: Install Redis CLI
+        run: sudo apt-get update && sudo apt-get install -y redis-tools
+
+      - name: Check Redis Server
+        run: redis-cli -h localhost -p 6379 ping
+
       - name: 7. Build with Gradle
         run: ./gradlew clean build
