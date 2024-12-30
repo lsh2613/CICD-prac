@@ -17,7 +17,7 @@ public class MyService {
         return "API is success!";
     }
 
-    public String redis() {
-        return redisUtil.toString();
+    public Long redis() {
+        return redisUtil.getValue("key");
     }
 }
