@@ -45,5 +45,4 @@ public class Controller {
     public String api() {
         return myService.api();
     }
-
 }
