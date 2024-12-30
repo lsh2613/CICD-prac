@@ -41,7 +41,7 @@ jobs:
         run: |
           mkdir -p $CREATE_SECRET_DIR
           echo -n "$CREATE_SECRET" | base64 --decode > $CREATE_SECRET_DIR/$CREATE_SECRET_DIR_FILE_NAME
-          echo $CREATE_SECRET_DIR/$CREATE_SECRET_DIR_FILE_NAME
+          cat $CREATE_SECRET_DIR/$CREATE_SECRET_DIR_FILE_NAME
 
       - name: 5. Grant execute permission for gradlew
         run: chmod +x gradlew
