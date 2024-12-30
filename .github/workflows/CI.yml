@@ -45,11 +45,11 @@ jobs:
       - name: 5. Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: 6. Redis Server in GitHub Actions
-        uses: supercharge/redis-github-action@1.8.0
-
-      - name: Check Redis Server
-        run: redis-cli -h localhost -p 6379 ping
+#      - name: 6. Redis Server in GitHub Actions
+#        uses: supercharge/redis-github-action@1.8.0
+#
+#      - name: Check Redis Server
+#        run: redis-cli -h localhost -p 6379 ping
 
       - name: 7. Build with Gradle
         run: ./gradlew clean build
