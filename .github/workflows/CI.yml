@@ -45,16 +45,11 @@ jobs:
       - name: 5. Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Install yq
-        run: sudo apt-get install -y yq
+      - name: 6. Redis Server in GitHub Actions
+        uses: supercharge/redis-github-action@1.8.0
 
-      - name: 7. Extract Redis Config
-        run: |
-          REDIS_HOST=$(yq '.spring.redis.host' src/main/resources/application.yml)
-          REDIS_PORT=$(yq '.spring.redis.port' src/main/resources/application.yml)
-          echo "Redis Host: $REDIS_HOST"
-          echo "Redis Port: $REDIS_PORT"
-        shell: bash
+      - name: Check Redis Port
+        run: echo PING | nc -w 1 localhost 6379 || echo "Redis is not running"
 
       - name: 7. Build with Gradle
         run: ./gradlew clean build
