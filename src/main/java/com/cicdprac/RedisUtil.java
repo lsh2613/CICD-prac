@@ -14,7 +14,6 @@ public class RedisUtil {
         this.refreshTokenTemplate = refreshTokenTemplate;
     }
 
-
     public Long getValue(String key) {
         return refreshTokenTemplate.opsForValue().get(key);
     }
