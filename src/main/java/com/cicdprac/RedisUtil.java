@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RedisUtil {
+
     @Autowired
     private final RedisTemplate<String, Long> refreshTokenTemplate;
 
